@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+main()
+{
+    map<char, int> map;
+    for (int i = 0; i < 26; i++)
+        map[char(97 + i)] = i;
+    string plain;
+    int n;
+    int k1, k2;
+    cout << "\n Enter Plaintext: ";
+    cin >> plain;
+    cout << "\n Enter key value k1 (multiplication): ";
+    cin >> k1;
+    cout << "\n Enter key value k2 (addition): ";
+    cin >> k2;
+    string cipher;
+    for (int i = 0; i < plain.size(); i++)
+    {
+        int t = ((map[plain[i]] * k1) + k2) % 26;
+        cipher += 'a' + t;
+    }
+    cout << "\n Ciphertext: " << cipher;
+}
