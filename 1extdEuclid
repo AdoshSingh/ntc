@@ -1,0 +1,47 @@
+#include <bits/stdc++.h>
+using namespace std;
+bool isGcd(int a, int b)
+{
+    int r;
+    while (a % b > 0)
+    {
+        r = a % b;
+        a = b;
+        b = r;
+        cout << "a =" << a << "\nb =" << b << "\nr = " << r << endl;
+    }
+    if (b == 1)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+int inverse(int a, int m)
+{
+    for (int i = 1; i < m; ++i)
+    {
+        if ((a * i) % m == 1)
+        {
+            return i;
+        }
+    }
+    return 0;
+}
+int main()
+{
+    int value, mod;
+    cout << "Enter value and mod" << endl;
+    cin >> value >> mod;
+    if (isGcd(mod, value))
+    {
+        cout << "The multiplicative inverse of " << value << ": " << inverse(value, mod) << endl;
+    }
+    else
+    {
+        cout << "No multiplicative inverse!" << endl;
+    }
+    return 0;
+}
