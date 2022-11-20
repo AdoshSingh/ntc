@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    unordered_map<char, int> map;
+    for (int i = 0; i < 26; i++)
+    {
+        map[i + 'a'] = i;
+    }
+    string plain, key, cipher;
+    cout << "Enter Plaintext(a-z) : ";
+    cin >> plain;
+    cout << "Enter Key Text(a-z) : ";
+    cin >> key;
+    int i = 0, j = 0;
+    while (i != plain.size())
+    {
+        if (j == key.size())
+            j = 0;
+        int t = (map[plain[i]] + map[key[j]]) % 26;
+        char code = t + 'a';
+        cipher += code;
+        i++;
+        j++;
+    }
+    cout << "\n Ciphertext: " << cipher;
+    return (0);
+}
