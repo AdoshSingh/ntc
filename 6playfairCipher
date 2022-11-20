@@ -1,0 +1,55 @@
+#include <bits/stdc++.h>
+using namespace std;
+int main()
+{
+    char key[5][5] =
+        {
+            {'a', 'v', 'e', 'n', 'g'},
+            {'r', 's', 'b', 'c', 'd'},
+            {'f', 'h', 'i', 'k', 'l'},
+            {'m', 'o', 'p', 'q', 't'},
+            {'u', 'w', 'x', 'y', 'z'}};
+    unordered_map<char, pair<int, int>> map;
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; j < 5; j++)
+            map[key[i][j]] = make_pair(i, j);
+    }
+    string plain, temp, cipher;
+    cout << "\n Enter Plain Text: ";
+    cin >> plain;
+    for (int i = 0; i < plain.size(); i++)
+    {
+        if (plain[i] == 'j')
+            plain[i] = 'i';
+        if (i > 0 && plain[i] == plain[i - 1])
+            temp += 'x';
+        temp += plain[i];
+    }
+    if ((temp.size()) % 2 != 0)
+        temp += 'x';
+    for (int t = 0; t < temp.size() - 1; t += 2)
+    {
+        int x1 = map[temp[t]].first;
+        int y1 = map[temp[t]].second;
+        int x2 = map[temp[t + 1]].first;
+        int y2 = map[temp[t + 1]].second;
+        if (x1 == x2)
+        {
+            cipher += key[x1][(y1 + 1) % 5];
+            cipher += key[x1][(y2 + 1) % 5];
+        }
+        else if (y1 == y2)
+        {
+            cipher += key[(x1 + 1) % 5][y1];
+            cipher += key[(x2 + 1) % 5][y1];
+        }
+        else
+        {
+            cipher += key[x1][y2];
+            cipher += key[x2][y1];
+        }
+    }
+    cout << "\n converted Ciphertext is: " << cipher;
+    return (0);
+}
